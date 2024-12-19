@@ -5,9 +5,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import com.wagner.europace.bowling_game.model.Frame;
-import com.wagner.europace.bowling_game.model.FrameSet;
-
 @SpringBootTest
 class BowlingGameApplicationTests {
 
