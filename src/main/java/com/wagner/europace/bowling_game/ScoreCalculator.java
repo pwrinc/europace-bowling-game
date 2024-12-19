@@ -44,7 +44,7 @@ public class ScoreCalculator {
       .build();
     System.out.println(String.format("Need to calculate score for frame set %s", frameSet.toString()));
     Integer score = calcScore(frameSet);
-    return "Calcualted score is " + score;
+    return "Calculated score is " + score;
   }
 
   private Frame parseFrame(String frameString, Integer frameNumber) {    
@@ -75,6 +75,9 @@ public class ScoreCalculator {
       }
       if (frame.isStrike() && !frame.isLast()) {
         bonusScore += frames.get(i+1).getFirstRoll() + frames.get(i+1).getSecondRoll();
+        if(frames.get(i+1).isStrike() && !frames.get(i+1).isLast()) {
+          bonusScore += frames.get(i+2).getFirstRoll();
+        }
       }
     }
 
