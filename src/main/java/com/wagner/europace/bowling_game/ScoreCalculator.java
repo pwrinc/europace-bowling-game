@@ -47,6 +47,12 @@ public class ScoreCalculator {
     return "Calculated score is " + score;
   }
 
+  /**
+   * Parse the frame String and return Frame object.
+   * @param frameString The String representing the frame, e.g. 4,5
+   * @param frameNumber The number of the frame. Something from 1 to 10
+   * @return The parsed Frame object
+   */
   private Frame parseFrame(String frameString, Integer frameNumber) {    
     String[] rolls = frameString.split(ScoreCalculator.FRAME_SPLIT_SEPARATOR);
     Frame frame = Frame.builder().number(frameNumber).build();
@@ -58,6 +64,11 @@ public class ScoreCalculator {
     return frame;
   }
 
+  /**
+   * Calculate the score for the given frame set
+   * @param frameSet The given frame set
+   * @return Total score for the given frame
+   */
   private Integer calcScore(FrameSet frameSet) {
     Integer baseScore = 0;
     Integer bonusScore = 0;
@@ -67,12 +78,15 @@ public class ScoreCalculator {
       Frame frame = frames.get(i);
       baseScore += frame.getFirstRoll();
       baseScore += frame.getSecondRoll();
+      // first accumulate the base score by just counting the pins
       if (frame.isLast() && frame.getThirdRoll() != null) {
         baseScore += frame.getThirdRoll();
       }
+      // If the current frame is a spare then apply bonus to it from following roll
       if (frame.isSpare() && !frame.isLast()) {
         bonusScore += frames.get(i+1).getFirstRoll();
       }
+      // IF the current frame is a strike then apply bonus to it from the following two roles
       if (frame.isStrike() && !frame.isLast()) {
         bonusScore += frames.get(i+1).getFirstRoll() + frames.get(i+1).getSecondRoll();
         if(frames.get(i+1).isStrike() && !frames.get(i+1).isLast()) {

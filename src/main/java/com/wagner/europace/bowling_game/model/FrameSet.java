@@ -9,6 +9,9 @@ import lombok.Setter;
 @Getter
 @Setter
 @Builder
+/**
+ * Class representing a complete frameset. Should hold 10 frames
+ */
 public class FrameSet {
   private Frame frame1;
   private Frame frame2;

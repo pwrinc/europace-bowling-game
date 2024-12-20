@@ -9,6 +9,9 @@ import lombok.Setter;
 @Getter
 @Setter
 @Builder
+/**
+ * Class representing a single frame with 2 or 3 rolls (if it's the last roll with number 10)
+ */
 public class Frame {
   private Integer firstRoll;
   private Integer secondRoll;
